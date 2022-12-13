@@ -1,0 +1,19 @@
+#!/bin/bash
+
+##PBS -q normal
+#PBS -q gpuvolta 
+#PBS -l ngpus=4 
+#PBS -l ncpus=48
+#PBS -l mem=128gb
+#PBS -l walltime=6:00:00
+#PBS -l storage=gdata/wa66
+
+##You can use double hash symbols (##) for comment lines.
+
+cd /g/data/wa66/erin/honours/subreddits
+source venv/new/bin/activate
+module load python3
+module load tensorflow
+echo "baseline"
+python3 twit_lstm2.py 
+

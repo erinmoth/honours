@@ -1,0 +1,26 @@
+#!/bin/bash
+
+##PBS -q normal
+#PBS -q gpuvolta 
+#PBS -l ngpus=4
+#PBS -l ncpus=48
+#PBS -l mem=128gb
+#PBS -l walltime=8:00:00
+#PBS -l storage=gdata/wa66
+
+##You can use double hash symbols (##) for comment lines.
+cd /g/data/wa66/erin/honours/subreddits
+source venv/new/bin/activate
+module unload python3
+module load tensorflow
+echo "all"
+python3 filereader.py finance_f anarcho_capitalism bitcoin dogecoin dogemarket personalfinance frugal
+#python3 filereader.py rel_f  amiugly askmen askwomen casualiama makeupaddiction offmychest rateme loseit mensrights gonewild okcupid relationship_advice relationships sex childfree twoxchromosomes trollxchromosomes tifu teenagers christianity clubteen friendsafari gaybros lewronggeneration malefashionadvice nofap parenting raisedbynarcissists skincareaddiction talesfromretail talesfromtechsupport babybumps
+echo "file reading done"
+python3 sent.py finance_f_domain finance_sml_a finance_f
+echo "sentiment assignment done"
+python3 new_lstm.py finance_f_res 
+
+
+
+

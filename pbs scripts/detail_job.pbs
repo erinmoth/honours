@@ -1,0 +1,28 @@
+#!/bin/bash
+
+##PBS -q normal
+#PBS -q gpuvolta 
+#PBS -l ngpus=4
+#PBS -l ncpus=48
+#PBS -l mem=128gb
+#PBS -l walltime=8:00:00
+#PBS -l storage=gdata/wa66
+
+##You can use double hash symbols (##) for comment lines.
+cd /g/data/wa66/erin/honours/subreddits
+source venv/new/bin/activate
+module unload python3
+module load tensorflow
+
+#echo "gaming"
+#python3 details.py gaming_f_domain gaming_sml_a gaming
+echo "sports"
+python3 details.py sports_f_domain sports_sml_a sports
+#echo "music"
+#python3 details.py music_f_domain music_sml_a music
+#echo "places"
+#python3 details.py places_f_domain places_sml_a places
+#echo "twox"
+#python3 details.py twox_f_domain twox_sml_a twox
+#echo "politics"
+#python3 details.py politics_f_domain politics_sml_a politics

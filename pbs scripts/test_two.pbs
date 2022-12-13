@@ -1,0 +1,37 @@
+#!/bin/bash
+
+##PBS -q normal
+#PBS -q gpuvolta 
+#PBS -l ngpus=4
+#PBS -l ncpus=48
+#PBS -l mem=128gb
+#PBS -l walltime=12:00:00
+#PBS -l storage=gdata/wa66
+
+##You can use double hash symbols (##) for comment lines.
+
+cd /g/data/wa66/erin/honours/subreddits
+source venv/new/bin/activate
+module load python3
+module load tensorflow
+
+echo "places"
+#python3 filereader.py places india ireland newzealand australia canada europe MapPorn Portland Seattle toronto unitedkingdom
+#echo "file reading done"
+#python3 sent.py places_domain reddit_dataset_places_75 places
+echo "sentiment assignment done"
+python3 new_lstm.py places_res 
+
+echo "politics"
+#python3 filereader.py pol Anarcho_Capitalism Futurology Libertarian news politics polandball worldnews
+echo "file reading done"
+python3 sent.py pol_domain reddit_dataset_politics_75 pol
+echo "sentiment assignment done"
+python3 new_lstm.py pol_res
+
+echo "religion"
+python3 filereader.py religion atheism Christianity DebateReligion exmormon
+echo "file reading done"
+python3 sent.py religion_domain reddit_dataset_religion_75 religion   
+echo "sentiment assignment done"
+python3 new_lstm.py religion_res

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+##PBS -q normal
+#PBS -q gpuvolta 
+#PBS -l ngpus=4
+#PBS -l ncpus=48
+#PBS -l mem=128gb
+#PBS -l walltime=24:00:00
+#PBS -l storage=gdata/wa66
+
+##You can use double hash symbols (##) for comment lines.
+cd /g/data/wa66/erin/honours/subreddits
+source venv/new/bin/activate
+module unload python3
+module load tensorflow
+echo "gaming"
+python3 filereader.py gaming_f 3ds gamedeals gamegrumps games gaming pokemon pokemontrades casualpokemontrades boardgames comicbooks dnd magictcg ps4 wiiu xboxone pcmasterrace buildapc pcgaming 2007scape leagueoflegends runescape archeage battlefield_4 clashofclans civ diablo guildwars2 minecraft skyrim starcraft steam steamgameswap tf2 codcompetitive csgobetting  darksouls  darksouls2 dota2 halo pathofexile wow dayz destinythegame dragonage elderscrollsonline eve fallout ffxiv globaloffensive globaloffensivetrade grandtheftauto hearthstone kerbalspaceprogram oculus planetside randomactsofgaming roosterteeth starcitizen starcraft ultrahardcore warthunder worldoftanks wow yugioh 
+#python3 filereader.py rel_f  amiugly askmen askwomen casualiama makeupaddiction offmychest rateme loseit mensrights gonewild okcupid relationship_advice relationships sex childfree twoxchromosomes trollxchromosomes tifu teenagers christianity clubteen friendsafari gaybros lewronggeneration malefashionadvice nofap parenting raisedbynarcissists skincareaddiction talesfromretail talesfromtechsupport babybumps
+echo "file reading done"
+python3 sent.py gaming_f_domain gaming_sml_a gaming_f
+echo "sentiment assignment done"
+python3 new_lstm.py gaming_f_res 
+
+
+
+

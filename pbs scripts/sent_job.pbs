@@ -1,0 +1,43 @@
+#!/bin/bash
+
+##PBS -q normal
+#PBS -q gpuvolta 
+#PBS -l ngpus=4
+#PBS -l ncpus=48
+#PBS -l mem=128gb
+#PBS -l walltime=24:00:00
+#PBS -l storage=gdata/wa66
+
+##You can use double hash symbols (##) for comment lines.
+cd /g/data/wa66/erin/honours/subreddits
+source venv/new/bin/activate
+module unload python3
+module load tensorflow
+echo "all"
+#python3 filereader.py all_f 3ds 4chan 2007scape actrade adviceanimals amiugly anarcho_capitalism android anime apple archeage askmen askwomen askscience asoiaf atheism australia aww babybumps baseball battlefield_4 bestof bicycling bigbrother bitcoin boardgames bodybuilding books bravefrontier britishproblems buildapc canada cars casualconversation casualiama casualpokemontrades cfb changemyview childfree christianity cigars circlejerk civ civcraft clashofclans clubteen codcompetitive collegebasketball comicbooks conspiracy cricket cringe cringepics csgobetting darknetmarkets darksouls darksouls2 dataisbeautiful dayz debatereligion destinythegame diablo diy dnd dogecoin dogemarket dota2 dragonage drugs elderscrollsonline electronic_cigarette europe eve exmormon explainlikeimfive fallout fantasyfootball fatlogic fatpeoplehate fatpeoplestories ffxiv fifa fitness food formula1 friendsafari frozen frugal funny futurology gamedeals gamegrumps gameofthrones games gaming gaybros gifs globaloffensive gonewild grandtheftautov guildwars2 guitar gunners guns halo hearthstone hiphopheads hockey homebrewing iama imgoingtohellforthis india ireland jailbreak jokes justiceporn justrolledintotheshop kerbalspaceprogram keto kotakuinaction leagueoflegends legaladvice lewronggeneration libertarian lifeprotips liverpoolfc longboarding loseit magictcg makeupaddiction malefashionadvice mapporn mechanicalkeyboards mensrights mildlyinteresting mindcrack minecraft mlplounge mls mma motorcycles movies music mylittlepony naruto nascar nba news newzealand nfl nofap nosleep nottheonion oculus offmychest okcupid opiates parenting pathofexile pcgaming pcmasterrace percyjacksonrp personalfinance photography photoshopbattles pics planetside pokemon pokemongiveaway pokemonplaza pokemontrades polandball politics portland potterplayrp programming ps4 raisedbynarcissists random_acts_of_amazon randomactsofgaming randomsuperpowers rateme reactiongifs reddevils relationship_advice relationships roosterteeth runescape rupaulsdragrace science seattle sex sfgiants shinypokemon showerthoughts skincareaddiction skyrim smashbros smite sneakers soccer sports squaredcircle starcitizen starcraft starwars steam steamgameswap subredditdrama summonerschool svexchange sysadmin talesfromretail talesfromtechsupport technology techsupport teenagers television tf2 thathappened thelastairbender thewalkingdead tifu tipofmytongue titanfall todayilearned toronto trees trollxchromosomes tumblrinaction twitchplayspokemon twoxchromosomes ultrahardcore unitedkingdom videos warthunder whowouldwin wiiu wildstar windowsphone woahdude worldnews worldoftanks wow writingprompts wtf xboxone yugioh
+#python3 filereader.py rel_f  amiugly askmen askwomen casualiama makeupaddiction offmychest rateme loseit mensrights gonewild okcupid relationship_advice relationships sex childfree twoxchromosomes trollxchromosomes tifu teenagers christianity clubteen friendsafari gaybros lewronggeneration malefashionadvice nofap parenting raisedbynarcissists skincareaddiction talesfromretail talesfromtechsupport babybumps
+echo "all lexicon on rel domain"
+python3 sent.py all_f_domain rel_sml_a rel_f_all_lex
+echo "sentiment assignment done"
+python3 new_lstm.py rel_f_all_lex_res 
+
+echo "controversial lexicon on rel domain"
+python3 sent.py cont_f_domain rel_sml_a rel_f_cont_lex
+echo "sentiment assignment done"
+python3 new_lstm.py rel_f_cont_lex_res 
+echo "gaming lexicon on gaming domain"
+python3 sent.py gaming_f_domain rel_sml_a rel_f_gaming_lex
+echo "sentiment assignment done"
+python3 new_lstm.py rel_f_gaming_lex_res 
+
+echo "twox lexicon on gaming domain"
+python3 sent.py twox_f_domain rel_sml_a rel_f_twox_lex
+echo "sentiment assignment done"
+python3 new_lstm.py rel_f_twox_lex_res 
+
+echo "politics lexicon on gaming domain"
+python3 sent.py politics_f_domain rel_sml_a rel_f_politics_lex
+echo "sentiment assignment done"
+python3 new_lstm.py rel_f_politics_lex_res 
+
+

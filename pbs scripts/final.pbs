@@ -1,0 +1,31 @@
+#!/bin/bash
+
+##PBS -q normal
+#PBS -q gpuvolta 
+#PBS -l ngpus=4
+#PBS -l ncpus=48
+#PBS -l mem=128gb
+#PBS -l walltime=24:00:00
+#PBS -l storage=gdata/wa66
+
+##You can use double hash symbols (##) for comment lines.
+cd /g/data/wa66/erin/honours/subreddits
+source venv/new/bin/activate
+module unload python3
+module load tensorflow
+echo "disc"
+#python3 filereader.py  disc_f adviceanimals askmen askwomen britishproblems casualconversation casualiama askscience aww funny gifs iama movies music pics politics technology todayilearned videos worldnews wtf explainlikeimfive bestof news science lifeprotips atheism minecraft trees mildlyinteresting random_acts_of_amazon whowouldwin thathappened tifu tipofmytongue
+#python3 filereader.py rel_f  amiugly askmen askwomen casualiama makeupaddiction offmychest rateme loseit mensrights gonewild okcupid relationship_advice relationships sex childfree twoxchromosomes trollxchromosomes tifu teenagers christianity clubteen friendsafari gaybros lewronggeneration malefashionadvice nofap parenting raisedbynarcissists skincareaddiction talesfromretail talesfromtechsupport babybumps
+echo "file reading done"
+#python3 sent.py disc_f_domain disc_sml_a disc_f
+echo "sentiment assignment done"
+python3 new_lstm.py disc_f_res 
+python3 new_lstm.py disc_f_res 
+python3 new_lstm.py disc_f_res 
+python3 new_lstm.py disc_f_res 
+python3 new_lstm.py disc_f_res 
+python3 new_lstm.py disc_f_res 
+python3 new_lstm.py disc_f_res 
+python3 new_lstm.py disc_f_res 
+python3 new_lstm.py disc_f_res 
+python3 new_lstm.py disc_f_res 

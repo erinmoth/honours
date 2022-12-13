@@ -1,0 +1,29 @@
+#!/bin/bash
+
+##PBS -q normal
+#PBS -q gpuvolta 
+#PBS -l ngpus=8 
+#PBS -l ncpus=96
+#PBS -l mem=128gb
+#PBS -l walltime=8:00:00
+#PBS -l storage=gdata/wa66
+
+##You can use double hash symbols (##) for comment lines.
+
+cd /g/data/wa66/erin/honours/subreddits
+source venv/new/bin/activate
+module unload python3
+module load tensorflow
+
+echo "Ask/advice"
+python3 new_lstm.py ask_f_res
+python3 new_lstm.py ask_f_res
+python3 new_lstm.py ask_f_res
+python3 new_lstm.py ask_f_res
+python3 new_lstm.py ask_f_res
+python3 new_lstm.py ask_f_res
+python3 new_lstm.py ask_f_res
+python3 new_lstm.py ask_f_res
+python3 new_lstm.py ask_f_res
+python3 new_lstm.py ask_f_res
+

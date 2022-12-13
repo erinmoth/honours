@@ -1,0 +1,39 @@
+#!/bin/bash
+
+##PBS -q normal
+#PBS -q gpuvolta 
+#PBS -l ngpus=1
+#PBS -l ncpus=12
+#PBS -l mem=128gb
+#PBS -l walltime=4:00:00
+#PBS -l storage=gdata/wa66
+
+##You can use double hash symbols (##) for comment lines.
+cd /g/data/wa66/erin/honours/subreddits
+source venv/new/bin/activate
+module unload python3
+module load tensorflow
+echo "all"
+python3 new_lstm.py ask_f_res
+echo "ask fin"
+python3 compare.py ask_f_res ask_f_res 
+python3 compare.py ask_f_res fin_f_res 
+echo "all sports"
+python3 compare.py ask_f_res all_f_res 
+python3 compare.py ask_f_res sports_f_res 
+echo "gaming disc"
+python3 compare.py ask_f_res gaming_f_res 
+python3 compare.py ask_f_res disc_f_res 
+echo "cont hum"
+python3 compare.py ask_f_res cont_f_res 
+python3 compare.py ask_f_res hum_f_res 
+echo "stem news"
+python3 compare.py ask_f_res stem_f_res 
+python3 compare.py ask_f_res news_f_res 
+echo "twox music"
+python3 compare.py ask_f_res twox_f_res 
+python3 compare.py ask_f_res music_f_res 
+echo "places politics rel"
+python3 compare.py ask_f_res places_f_res 
+python3 compare.py ask_f_res politics_f_res 
+python3 compare.py ask_f_res rel_f_res 
